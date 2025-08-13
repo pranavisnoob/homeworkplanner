@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyPlanner - Timetable</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/dashboard.css"/>
+  <link rel="stylesheet" href="../css/timetable.css"/>
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo-link">
+          <div class="logo-wrapper">
+            <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="StudyPlanner Logo" class="logo"/>
+            <span class="brand-name">Study<span>Planner</span></span>
+          </div>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i><span>Calendar</span></a></li>
+          <li><a href="tasks.html"><i class="fas fa-tasks"></i><span>Tasks</span><span class="badge" id="tasksBadge">0</span></a></li>
+          <li class="active"><a href="timetable.html"><i class="fas fa-calendar-week"></i><span>Timetable</span></a></li>
+          <li><a href="settings.html"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" id="sidebarUserAvatar"></div>
+          <div class="user-info">
+            <h4 id="sidebarUserName">User Name</h4>
+            <span id="sidebarUserClass">Class/Grade</span>
+          </div>
+        </div>
+        <button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="top-nav">
+        <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+        <h1>Timetable</h1>
+        <div class="nav-actions">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search timetable..." id="searchInput"/>
+          </div>
+          <button class="btn btn-notification" id="notificationBtn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">0</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="timetable-content">
+        <div class="timetable-controls">
+          <button id="prevWeekBtn" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Previous Week</button>
+          <h2 id="currentWeekRange"></h2>
+          <button id="nextWeekBtn" class="btn btn-secondary">Next Week <i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="timetable-grid" id="timetableGrid">
+          <div class="time-column-header"></div>
+          <div class="day-header">Monday</div>
+          <div class="day-header">Tuesday</div>
+          <div class="day-header">Wednesday</div>
+          <div class="day-header">Thursday</div>
+          <div class="day-header">Friday</div>
+          <div class="day-header">Saturday</div>
+          <div class="day-header">Sunday</div>
+        </div>
+
+        <p id="noEventsMessage" class="no-events-message" style="display:none;">
+          No events scheduled for this week.
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/sidebar.js" type="module"></script>
+  <script src="../js/timetable.js" type="module"></script>
+</body>
+</html>

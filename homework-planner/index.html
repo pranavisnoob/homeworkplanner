@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>StudyPlanner - Organize Your Academic Life</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+  <script src="js/main.js"></script>
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Login to StudyPlanner</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p class="form-footer">Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Create Your Account</h2>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" required>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="signupClass">Class/Grade</label>
+          <input type="text" id="signupClass" placeholder="e.g., Class 10 CBSE" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Account</button>
+        <p class="form-footer">Already have an account? <a href="#" id="showLogin">Login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <a href="index.html" class="logo-link">
+          <div class="logo-wrapper">
+            <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="Logo" class="logo">
+            <span class="brand-name">Study<span>Planner</span></span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="navbar-links">
+        <a href="dashboard/index.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="dashboard/calendar.html" class="nav-link">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Calendar</span>
+        </a>
+        <a href="dashboard/tasks.html" class="nav-link">
+          <i class="fas fa-tasks"></i>
+          <span>Tasks</span>
+        </a>
+        <a href="dashboard/timetable.html" class="nav-link">
+          <i class="fas fa-calendar-week"></i>
+          <span>Timetable</span>
+        </a>
+      </div>
+      
+      <div class="navbar-actions" id="authButtons">
+        <button class="btn btn-login" id="loginBtn">Login</button>
+        <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+      </div>
+      
+      <div class="user-profile-nav" id="userProfileNav" style="display:none">
+        <div class="user-avatar" id="navUserInitial"></div>
+        <span id="navUserName"></span>
+        <button class="btn btn-logout" id="navLogoutBtn">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+      
+      <button class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Organize Your Study Schedule</h1>
+      <p>Designed specifically for students to manage academics effectively</p>
+      <div class="hero-buttons">
+        <a href="dashboard/index.html" class="btn btn-outline-white btn-lg">Get Started</a>
+        <a href="#features" class="btn btn-primary btn-lg">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2>Key Features</h2>
+      <p>Everything you need to stay organized and productive</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <h3>Exam Planner</h3>
+        <p>Track all your exams, unit tests, and competitive exam dates in one place</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-tasks"></i>
+        </div>
+        <h3>Timetable</h3>
+        <p>Displays your weekly study schedule with tasks and exams in a clear, organized grid</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-chart-pie"></i>
+        </div>
+        <h3>Timetable</h3>
+        <p>Displays your weekly study schedule with tasks and exams in a clear, organized grid</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="section-header">
+      <h2>What Students Say</h2>
+      <h4>Hear from students who improved their grades!</h4>
+    </div>
+    
+    <div class="testimonials-container">
+      <div class="testimonial-track">
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"This planner helped me score 95% in my 10th boards! The subject tracking was perfect for managing Physics and Math."</p>
+          <div class="student-info">
+            <img src="https://randomuser.me/api/portraits/women/51.jpg?nat=th" alt="Priya S.">
+            <div>
+              <h4>Priya Thapar</h4>
+              <span>Class 10, CBSE</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"I went from failing to becoming the topper of my class in merely 6 months using StudyPlanner's progress tracking features."</p>
+          <div class="student-info">
+            <img src="https://randomuser.me/api/portraits/men/4.jpg?nat=in" alt="Rahul K.">
+            <div>
+              <h4>Aniket Kumar</h4>
+              <span>Class 12, CBSE</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"I used to procrastinate a lot before. Ever since using the StudyPlanner, my preparation has been on a perfect track!"</p>
+          <div class="student-info">
+            <img src="https://randomuser.me/api/portraits/women/8.jpg?nat=in" alt="Rahul K.">
+            <div>
+              <h4>Deepika Verma</h4>
+              <span>NEET Aspirant</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-content">
+      <h2>Ready to Improve Your Grades?</h2>
+      <p>Join thousands of students who are achieving academic success with StudyPlanner</p>
+      <div class="cta-buttons">
+        <a href="dashboard/index.html" class="btn btn-primary btn-lg">Get Started For Free</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="credits">
+        <h4>Meet Our Team of StudyPlanner:</h4>
+        <p><b>Aarit Sharma</b> – Lead programmer</p>
+        <p><b>Rajdeep Singh</b> – Visual Designer & Speaker</p>
+        <p><b>Akshit Narula</b> – Researcher & Speaker </p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="copyright">© 2025 StudyPlanner. All rights reserved by Sahibzada Fateh Singh House.</p>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

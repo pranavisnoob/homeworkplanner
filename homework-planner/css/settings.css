@@ -1,0 +1,159 @@
+/* settings.css */
+
+.settings-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.settings-section {
+  margin-bottom: 2.5rem;
+}
+
+.settings-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.settings-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem 2rem;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.settings-card .setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-item-label strong {
+  color: #343a40;
+  font-weight: 600;
+}
+
+.setting-item-label p {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* Theme Switcher 
+.theme-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.theme-option {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-option.active {
+  border-color: var(--primary);
+  background-color: #495057;
+  color: var(--primary);
+  font-weight: 600;
+} */
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: gray;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Add these styles to the bottom of the file */
+:root {
+  --bg-primary: #ffffff;
+  --text-primary: #333333;
+  --border-color: #e0e0e0;
+  --card-bg: #ffffff;
+  --hover-bg: #f5f5f5;
+}
+
+.dark {
+  --bg-primary: #1a1a1a;
+  --text-primary: #f0f0f0;
+  --border-color: #444444;
+  --card-bg: #2d2d2d;
+  --hover-bg: #3a3a3a;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.settings-card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+/*
+.theme-option {
+  background-color: rgb(200, 198, 198);
+  border-color: var(--border-color);
+}
+
+.theme-option:hover {
+  background-color: var(--hover-bg);
+} */

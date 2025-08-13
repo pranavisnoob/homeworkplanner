@@ -1,0 +1,197 @@
+/* Timetable Page Layout Fix */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+
+
+/* Timetable Specific Styles */
+.timetable-content {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+.timetable-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.timetable-controls h2 {
+  font-size: 1.5em;
+  color: #333;
+  margin: 0;
+}
+
+.timetable-controls .btn-secondary {
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px solid #ced4da;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.timetable-controls .btn-secondary:hover {
+  background-color: #dee2e6;
+  border-color: #adb5bd;
+}
+
+.timetable-grid {
+  display: grid;
+  /* 1 column for time, 7 columns for days */
+  grid-template-columns: 80px repeat(7, 1fr);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fdfdfd;
+}
+
+.day-header, .time-column-header {
+  background-color: #f0f2f5;
+  padding: 15px 10px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  color: #555;
+  font-size: 0.95em;
+}
+
+.time-column-header {
+  border-right: none;
+}
+
+/* Remove right border for the last day header */
+.day-header:last-child {
+  border-right: none;
+}
+
+.time-slot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 5px;
+  font-size: 0.85em;
+  color: #777;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fafafa;
+  min-height: 50px; /* Ensure consistent height for time slots */
+}
+
+.time-slot:last-child {
+  border-right: none;
+}
+
+.grid-cell {
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+  padding: 5px;
+  min-height: 50px; /* Match time slot height */
+}
+
+.grid-cell:last-child {
+  border-right: none;
+}
+
+/* Remove bottom border for cells in last row */
+.timetable-grid > div:nth-last-child(-n + 7) {
+  border-bottom: none;
+}
+
+.event-card {
+  background-color: #d1e7dd; /* Default for tasks */
+  border-left: 4px solid #28a745; /* Green for tasks */
+  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 5px;
+  font-size: 0.8em;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.event-card.exam {
+  background-color: #f8d7da; /* Light red for exams */
+  border-left: 4px solid #dc3545; /* Red for exams */
+}
+
+.event-card h4 {
+  margin: 0 0 5px 0;
+  font-size: 1em;
+  color: #333;
+}
+
+.event-card p {
+  margin: 0;
+  color: #555;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+}
+
+.no-events-message {
+  text-align: center;
+  padding: 30px;
+  font-size: 1.1em;
+  color: #777;
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .timetable-grid {
+    grid-template-columns: 60px repeat(7, 1fr);
+    font-size: 0.9em;
+  }
+  .day-header, .time-slot {
+    padding: 10px 5px;
+  }
+  .timetable-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .timetable-controls h2 {
+    font-size: 1.3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .timetable-grid {
+    grid-template-columns: 1fr;
+  }
+  .day-header, .time-column-header, .time-slot, .grid-cell {
+    border-right: none;
+  }
+  .day-header {
+    background-color: #e0e2e5;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+  }
+  .time-slot {
+    display: none;
+  }
+  .grid-cell {
+    min-height: auto;
+    padding: 10px;
+  }
+}

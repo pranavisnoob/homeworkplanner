@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyPlanner - Settings</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/tasks.css">
+  <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-spinner"></div>
+  </div>
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo-link">
+          <div class="logo-wrapper">
+            <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="StudyPlanner Logo" class="logo">
+            <span class="brand-name">Study<span>Planner</span></span>
+          </div>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i><span>Calendar</span></a></li>
+          <li><a href="tasks.html"><i class="fas fa-tasks"></i><span>Tasks</span><span class="badge" id="tasksBadge">0</span></a></li>
+          <li><a href="timetable.html"><i class="fas fa-calendar-week"></i><span>Timetable</span></a></li>
+          <li><a href="settings.html"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" id="sidebarUserAvatar"></div>
+          <div class="user-info">
+            <h4 id="sidebarUserName">User Name</h4>
+            <span id="sidebarUserClass">Class/Grade</span>
+          </div>
+        </div>
+        <button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="top-nav">
+        <button class="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+        <h1>Settings</h1>
+      </header>
+
+      <div class="settings-container">
+        
+        <section class="settings-section">
+          <h2>Notifications</h2>
+          <div class="settings-card">
+            <div class="setting-item">
+              <div class="setting-item-label">
+                <strong>Enable Notifications</strong>
+                <p>Get reminders for your tasks and exams.</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="enableNotifications">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </section>
+        
+        <section class="settings-section">
+          <h2>Account</h2>
+          <div class="settings-card">
+            <div class="setting-item">
+              <div class="setting-item-label">
+                <strong>Change Password</strong>
+                <p>Update your account password.</p>
+              </div>
+              <button class="btn btn-primary btn-sm" id="changePasswordBtn">Change</button>
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-label">
+                <strong>Delete Account</strong>
+                <p>Permanently delete your account and all data.</p>
+              </div>
+              <button class="btn btn-danger btn-sm" id="deleteAccountBtn">Delete Account</button>
+            </div>
+          </div>
+        </section>
+        
+        <section class="settings-section">
+          <h2>Data Management</h2>
+          <div class="settings-card">
+            <div class="setting-item">
+              <div class="setting-item-label">
+                <strong>Export Data</strong>
+                <p>Download all your tasks and exams as a JSON file.</p>
+              </div>
+              <button class="btn btn-outline btn-sm" id="exportDataBtn"><i class="fas fa-download"></i> Export</button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-item-label">
+                    <strong>Reset All Data</strong>
+                    <p>Permanently delete all tasks, exams, and settings.</p>
+                </div>
+                <button class="btn btn-danger btn-sm" id="resetDataBtn"><i class="fas fa-trash"></i> Reset</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div class="modal" id="passwordModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Change Password</h2>
+      <form id="passwordForm">
+        <div class="form-group">
+          <label for="currentPassword">Current Password</label>
+          <input type="password" id="currentPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+          <input type="password" id="confirmPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content small">
+      <h3 id="confirmTitle">Confirm Action</h3>
+      <p id="confirmText">Are you sure you want to proceed? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-text" id="cancelActionBtn">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmActionBtn">
+          <i class="fas fa-check"></i> Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/loading.js"></script>
+  <script src="../js/sidebar.js" type="module"></script>
+  <script src="../js/settings.js" type="module"></script>
+</body>
+</html>

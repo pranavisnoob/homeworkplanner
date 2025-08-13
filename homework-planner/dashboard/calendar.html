@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyPlanner - Calendar</title>
+  <!-- Add this to the <head> of ALL your HTML files -->
+
+  <!-- Link the new theme stylesheet -->
+  <link rel="stylesheet" href="../css/theme.css"> <!-- Adjust path if needed -->
+
+  <!-- SCRIPT: Apply theme from localStorage to prevent FOUC -->
+  <script>
+    const savedTheme = localStorage.getItem('theme');
+    // If a theme is saved and it's 'dark', apply the dark theme attribute.
+    // We don't need an 'else' because light is the default.
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+
+<!-- Link the new theme script (use defer to load after HTML parsing) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/calendar.css">
+  <link rel="stylesheet" href="../css/tasks.css"> <!-- For modal styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-spinner"></div>
+  </div>
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="logo-link">
+          <div class="logo-wrapper">
+            <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="StudyPlanner Logo" class="logo">
+            <span class="brand-name">Study<span>Planner</span></span>
+          </div>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="index.html">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="calendar.html">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="tasks.html">
+              <i class="fas fa-tasks"></i>
+              <span>Tasks</span>
+              <span class="badge" id="tasksBadge">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="timetable.html">
+              <i class="fas fa-calendar-week"></i>
+              <span>Timetable</span>
+            </a>
+          </li>
+          <li>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" id="sidebarUserAvatar"></div>
+          <div class="user-info">
+            <h4 id="sidebarUserName">User Name</h4>
+            <span id="sidebarUserClass">Class/Grade</span>
+          </div>
+        </div>
+        <button class="btn btn-logout" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Navigation -->
+      <header class="top-nav">
+        <button class="mobile-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1>Calendar</h1>
+      </header>
+
+      <!-- Calendar Content -->
+      <div class="dashboard-content" style="padding: 0;">
+        <div id="calendar" class="calendar-fullscreen"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Event Modal -->
+  <div class="modal" id="eventModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="eventModalTitle">Add New Item</h2>
+      <form id="eventForm">
+        <input type="hidden" id="eventId">
+        <div class="form-group">
+          <label for="eventTitle">Title</label>
+          <input type="text" id="eventTitle" required>
+        </div>
+        <div class="form-group">
+          <label for="eventType">Type</label>
+          <select id="eventType" required>
+            <option value="task">Task</option>
+            <option value="exam">Exam</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="eventSubject">Subject</label>
+          <select id="eventSubject">
+            <option value="">None</option>
+            <option value="math">Mathematics</option>
+            <option value="science">Science</option>
+            <option value="english">English</option>
+            <option value="history">History</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="eventStart">Start</label>
+          <input type="datetime-local" id="eventStart" required>
+        </div>
+        <div class="form-group">
+          <label for="eventEnd">End</label>
+          <input type="datetime-local" id="eventEnd" required>
+        </div>
+        <div class="form-group">
+          <label for="eventNotes">Notes</label>
+          <textarea id="eventNotes" rows="3"></textarea>
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Day Details Modal -->
+  <div class="modal" id="dayDetailsModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="dayModalTitle">Details for <span id="dayDate"></span></h2>
+      
+      <div class="importance-indicator">
+        <label>Mark as important:</label>
+        <input type="checkbox" id="importantDayToggle">
+      </div>
+      
+      <div id="autoImportantIndicator" class="auto-important-indicator" style="display: none;">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>Automatically marked important (multiple events)</span>
+      </div>
+      
+      <div class="events-container">
+        <h3 class="section-title"><i class="fas fa-tasks"></i> Tasks</h3>
+        <div id="dayTasksList" class="events-list"></div>
+        
+        <h3 class="section-title"><i class="fas fa-calendar-alt"></i> Exams</h3>
+        <div id="dayExamsList" class="events-list"></div>
+      </div>
+      
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="addTaskForDayBtn">
+          <i class="fas fa-plus"></i> Add Task
+        </button>
+        <button class="btn btn-primary" id="addExamForDayBtn">
+          <i class="fas fa-plus"></i> Add Exam
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content small">
+      <h3>Confirm Deletion</h3>
+      <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-text" id="cancelDeleteBtn">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/loading.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <script src="../js/sidebar.js" type="module"></script>
+  <script src="../js/calendar.js" type="module"></script>
+</body>
+</html>
